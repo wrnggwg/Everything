@@ -1,0 +1,150 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.div_1{
+    margin-left: 20px;
+    width: 1390px;
+}
+#IMG_one{
+    float: left;
+    margin-left: 20px;
+    width: 75px;
+    height: 75px;
+}
+#div_one{
+    float: right;
+    width: 1000px;
+    height: 75px;
+}
+.List_1{
+    float: right;
+    margin: 25px;
+    list-style:disc;
+}
+#div_two{
+    display: flex;
+    height: 2000px;
+    background-color: rgb(230, 228, 228);
+}
+#Left{
+    margin: 20px;
+    width: 900px;
+    height: 2000px;
+}
+.left_1{
+    float: left;
+    width: 900px;
+    background-color: rgb(255, 255, 255);
+}
+.one{
+    padding:10px;
+    margin-top: 7px;
+    margin-left:20px;
+}
+#writer{
+    font-size:smaller;
+    color: gray;
+}
+.par{
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size:16px;
+}
+#par1{
+    margin-top: 15px;
+    text-indent: 30px;
+}
+#pic{
+    width: 250px;
+    height: 220px;
+}
+#par2{
+    text-indent: 30px;
+}
+#div_two{
+    height: 2400px;
+}
+#div_three{
+    margin-top: 20px;
+    height: 670px;
+}
+ul li{
+    margin-left: 50px;
+    margin-top: 5px;
+    list-style: none;
+}
+#div_four{
+    margin-top: 20px;
+    height: 500px;
+}
+#three{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin:25px;
+    width: 750px;
+    height:350px;
+}
+.kuang{
+    width: 125px;
+    height: 145px;
+    margin-top: 10px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 1px;
+}
+.IMG{
+    margin: 12px;
+    width: 100px;
+    height: 100px;
+}
+.Text{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+#div_five{
+    height: 400px;
+    margin-top: 20px;
+}
+ol li{
+    margin-left:70px;
+}
+.Border_style{
+    border: 1px solid gray;
+}
+.Right{
+    margin-top: 20px;
+    width:430px;
+    height: 700px;
+    background-color:rgb(255, 255, 255);
+}
+#right_one{
+    margin: 15px;
+    padding: 15px;
+}
+#Table{
+    margin: 15px 35px;
+    border-style: none;
+}
+.text_1{
+    margin: 10px;
+    width: 200px;
+    height: 25px;
+    border: 1px solid black;
+}
+#text_one{
+    margin: 10px;
+    border: 1px solid black;
+}
+#Submit{
+    width: 325px;
+    height: 40px;
+    margin-left: 60px;
+    margin-top: 10px;
+    border: 0;
+    background-color: rgb(43, 72, 238);
+    color: azure;
+    border-radius: 5px;
+}
