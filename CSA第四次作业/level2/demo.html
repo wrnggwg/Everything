@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="text" cols="80" rows="10"></textarea>
+    <button class="post">点击发布</button>
+    <div class="list">
+    </div>
+
+    <script>
+       let post = document.getElementsByClassName("post");
+       let text = document.getElementById("text");
+       post[0].onclick = function(){
+         text.value = " ";
+       }
+    </script>
+</body>
+</html>
