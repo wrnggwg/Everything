@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function Student(name) { 
+	    function People(name) {
+            People.cbs = [];
+            People.cbs.push(() => {
+                console.log("Hi! This is "+name+"!");
+                People.next();
+            })
+		    setTimeout(() => {
+                People.next();
+            }, 0);
+            return People;
+	    }
+        People.next = function(){
+            const cb = People.cbs.shift();
+            cb && cb();
+        }
+
+        People.sleep = function(time) {
+            People.cbs.push(
+                () =>{
+                    setTimeout(() => {
+                        console.log("Wake up after "+time);
+                        People.next();
+                    }, time*1000);
+                }
+            )
+            return People;
+        }
+
+        People.sleepFirst = function(time) {
+            People.cbs.unshift(() => {
+                setTimeout(() => {
+                    console.log("Wake up after "+time);
+                    People.next();
+                }, time*1000);
+            }
+            )
+            return People;
+        }
+        People.study =  function(course) {
+             People.cbs.push( ()=>{
+                console.log("Study "+course);
+                People.next();
+             }
+             )
+            return People;
+        }
+        
+	    return new People(name);
+}
+
+ Student('fxy');
+ Student('fxy').sleep(3).study('javascript');
+ Student('fxy').study('javascript').study('Vue');
+ Student('fxy').sleepFirst(5).study('Ajax');
+    </script>
+</body>
+</html>
