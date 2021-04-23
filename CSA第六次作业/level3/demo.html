@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #all{
+        width: 1000px;
+        height: 1000px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    div{
+        width: 150px;
+        height: 200px;
+        font-size: 10px;
+    }
+    img{
+        width: 150px;
+        height: 150px;
+    }
+    </style>
+</head>
+<body>
+    <div id="all">
+
+    </div>
+    <script>
+        // 传入最基本的配置，会合并之后调用方法时传入的配置
+        class Ajax{
+            obj = new Object; 
+            url = new Array;
+            url = "";
+            method = "";
+            constructor(url,obj){
+                this.obj = obj;
+                this.url = url;
+                this.method = "GET";
+                return this.start();
+            }
+            
+            get(url,obj){
+                this.obj = obj;
+                this.url = url;
+                this.method = "GET";
+                return this.start();   
+            }
+            post(url,obj){
+                this.obj = obj;
+                this.url = url;
+                this.method = "POST";
+                return this.start();
+            }
+            start(){
+                var xhr = new XMLHttpRequest();
+                xhr.open(this.method,this.url,true);
+                xhr.onreadystatechange = () => {
+                    if(xhr.readyState === 4){
+                        if((xhr.status >= 200 && xhr.status < 300)||xhr.status == 304){
+                            let res = JSON.parse(xhr.responseText);
+                            this.obj.succeed(res);
+                        }
+                        else this.obj.failed();
+                    }
+                }
+                xhr.send();
+            }
+            
+        }
+        var obj = new Object;
+        obj = {
+            data: JSON.stringify(),
+            headers: {
+                
+            },
+            succeed(res){
+                console.log(res);
+                for(let i = 0;i<30;i++){
+                    let div = document.createElement('div');
+                    all.appendChild(div);
+                    let im = document.createElement('img');
+                    im.src = res.result[i].picUrl;
+                    div.appendChild(im);
+                    let text = document.createTextNode(res.result[i].name);
+                    div.appendChild(text);
+            }},
+            failed(){
+                console.log("failed")
+                },
+        }
+        const ajax = new Ajax("http://musicapi.leanapp.cn/personalized",obj);
+        ajax.get("http://musicapi.leanapp.cn/personalized",obj);
+        ajax.post("http://musicapi.leanapp.cn/personalized",obj);
+        
+    </script>
+</body>
+</html>

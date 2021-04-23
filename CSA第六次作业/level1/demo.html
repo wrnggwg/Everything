@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #all{
+            width: 1000px;
+            height: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        div{
+            width: 150px;
+            height: 200px;
+            font-size: 10px;
+        }
+        img{
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div id="all">
+
+    </div>
+    <script>
+        let all = document.getElementById('all');
+        const xhr = new XMLHttpRequest();
+        xhr.open('get','http://musicapi.leanapp.cn/personalized?',true);
+        xhr.onreadystatechange = () =>{
+            if(xhr.readyState === 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    const res = JSON.parse(xhr.responseText);
+                    console.log(res);
+                    for(let i = 0;i<30;i++){
+                        let div = document.createElement('div');
+                        all.appendChild(div);
+                        let im = document.createElement('img');
+                        im.src = res.result[i].picUrl;
+                        div.appendChild(im);
+                        let text = document.createTextNode(res.result[i].name);
+                        div.appendChild(text);
+                    }
+                }
+                else {
+                    console.log("请求失败");
+                }
+            }
+            
+            
+        }
+        xhr.send();
+    </script>
+</body>
+</html>

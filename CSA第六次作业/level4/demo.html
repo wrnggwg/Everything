@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #all{
+            width: 1000px;
+            height: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        div{
+            width: 150px;
+            height: 200px;
+            font-size: 10px;
+        }
+        img{
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div id="all">
+
+    </div>
+    <script>
+        var url = "http://musicapi.leanapp.cn/personalized";
+        succeed = function(res){
+            for(let i = 0;i<30;i++){
+                    let div = document.createElement('div');
+                    all.appendChild(div);
+                    let im = document.createElement('img');
+                    im.src = res.result[i].picUrl;
+                    div.appendChild(im);
+                    let text = document.createTextNode(res.result[i].name);
+                    div.appendChild(text);
+            }}
+        failed = function(){
+            console.log("failed");
+        }
+        async function fetchmethod(url,succeed,failed){
+            const res = await fetch(url);
+            if((res.status >= 200 && res.status < 300)||res.status == 304){
+                const json = await res.json();
+                console.log(json);
+                succeed(json);
+            }
+            else failed();
+            
+        }
+        fetchmethod(url,succeed,failed);
+    </script>
+</body>
+</html>
