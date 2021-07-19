@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #main{
+        width:600px;
+        height:600px;
+        border:1px solid black;
+        margin:20px;
+    }
+    button{
+        margin:5px;
+    }
+    </style>
+</head>
+<body>
+    <input type="text" id="text">
+    <button id="leftIn">左侧入</button>
+    <button id="rightIn">右侧入</button>
+    <button id="leftOut">左侧出</button>
+    <button id="rightOut">右侧出</button>
+    <button id="Sort">重新排序</button>
+    <button id="Clear">清空</button>
+    <button id="rdm">随机生成</button>
+    <div id="main">
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+    </div>
+    <script>
+        let canvas = document.getElementById('myCanvas');
+        let ctx = canvas.getContext("2d");
+        ctx.fillStyle = 'green';
+        let leftIn = document.getElementById('leftIn');
+        let leftOut = document.getElementById('leftOut');
+        let rightIn = document.getElementById('rightIn');
+        let rightOut = document.getElementById('rightOut');
+        let Clear = document.getElementById('Clear');
+        let rdm = document.getElementById('rdm');
+        let text = document.getElementById('text');
+        let Sort = document.getElementById('Sort');
+        let arr=[];
+        let x=0;
+        let y=0;
+        let Width = 40;  //元素宽度
+        let space = 0;
+        let Height = 0;
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        leftIn.onclick = function(){
+            if(text.value<10||text.value>100){
+                alert("请输入10~100的数字");
+            }
+            else{
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                if(arr.length==0){
+                    arr.push(text.value);
+                }
+                else {
+                    for(let i=arr.length;i>0;i--){
+                        arr[i] = arr[i-1];
+                    }
+                    arr[0] = text.value;
+                }
+                //space 元素之间的间隔
+                space = (canvas.width-Width*arr.length)/(arr.length+1);
+                for(var i=0;i<arr.length;i++){
+                    //x 元素x轴位置
+                    x=(Width+space)*i+space;
+                    //y 元素y轴位置
+                    y=600-6*arr[i];
+                    //Height 元素高度
+                    Height = 6*arr[i];
+                    ctx.fillStyle = 'green';
+                    ctx.fillRect(x,y,Width,Height);
+                    ctx.fillStyle = 'black';
+                    ctx.font = "18px serif";
+                    ctx.fillText(arr[i],x+9,y+15);
+                }
+            }
+        }
+        leftOut.onclick = function(){
+            arr.shift();
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+                //space 元素之间的间隔
+                space = (canvas.width-Width*arr.length)/(arr.length+1);
+                for(var i=0;i<arr.length;i++){
+                    //x 元素x轴位置
+                    x=(Width+space)*i+space;
+                    //y 元素y轴位置
+                    y=600-6*arr[i];
+                    //Height 元素高度
+                    Height = 6*arr[i];
+                    ctx.fillStyle = 'green';
+                    ctx.fillRect(x,y,Width,Height);
+                    ctx.fillStyle = 'black';
+                    ctx.font = "18px serif";
+                    ctx.fillText(arr[i],x+9,y+15);
+                }
+        }
+        rightIn.onclick = function(){
+            if(text.value<10||text.value>100){
+                alert("请输入10~100的数字");
+            }
+            else{
+                arr.push(text.value);
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                //space 元素之间的间隔
+                space = (canvas.width-Width*arr.length)/(arr.length+1);
+                for(var i=0;i<arr.length;i++){
+                    //x 元素x轴位置
+                    x=(Width+space)*i+space;
+                    //y 元素y轴位置
+                    y=600-6*arr[i];
+                    //Height 元素高度
+                    Height = 6*arr[i];
+                    ctx.fillStyle = 'green';
+                    ctx.fillRect(x,y,Width,Height);
+                    ctx.fillStyle = 'black';
+                    ctx.font = "18px serif";
+                    ctx.fillText(arr[i],x+9,y+15);
+                }
+            }
+        }
+        rightOut.onclick = function(){
+            arr.pop();
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+                //space 元素之间的间隔
+                space = (canvas.width-Width*arr.length)/(arr.length+1);
+                for(var i=0;i<arr.length;i++){
+                    //x 元素x轴位置
+                    x=(Width+space)*i+space;
+                    //y 元素y轴位置
+                    y=600-6*arr[i];
+                    //Height 元素高度
+                    Height = 6*arr[i];
+                    ctx.fillStyle = 'green';
+                    ctx.fillRect(x,y,Width,Height);
+                    ctx.fillStyle = 'black';
+                    ctx.font = "18px serif";
+                    ctx.fillText(arr[i],x+9,y+15);
+                }
+        }
+        Clear.onclick = function(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            while(arr[0]){
+                arr.pop();
+            }
+        }
+        rdm.onclick = function(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            for(let i=0;i<10;i++){
+                rdmnum = random(10,100);
+                arr.push(rdmnum);
+            }
+            space = (canvas.width-Width*arr.length)/(arr.length+1);
+                for(var i=0;i<arr.length;i++){
+                    //x 元素x轴位置
+                    x=(Width+space)*i+space;
+                    //y 元素y轴位置
+                    y=600-6*arr[i];
+                    //Height 元素高度
+                    Height = 6*arr[i];
+                    ctx.fillStyle = 'green';
+                    ctx.fillRect(x,y,Width,Height);
+                    ctx.fillStyle = 'black';
+                    ctx.font = "18px serif";
+                    ctx.fillText(arr[i],x+9,y+15);
+                }
+        }
+        function bubbleSort(arr){
+            
+            function sort() {
+                // virtualArr 用来存放 每一个步内容的数组
+                var virtualArr = [arr.slice()];
+                var max = arr.length;
+                for (var i = 0; i < max; i++) {
+                    var done = true;
+                    for (var j = 0; j < max - i; j++) {
+                        if (arr[j] > arr[j + 1]) {
+                            var temp = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = temp;
+                            done = false;
+                            virtualArr.push(arr.slice());
+                        }
+                    };
+                    if(done){
+                        break;
+                    };
+                }
+                return virtualArr;
+            }
+            function darw(arr){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                space = (canvas.width-Width*arr.length)/(arr.length+1);
+                for(var i=0;i<arr.length;i++){
+                    //x 元素x轴位置
+                    
+                    x=(Width+space)*i+space;
+                    
+                    //y 元素y轴位置
+                    y=600-6*arr[i];
+                    //Height 元素高度
+                    Height = 6*arr[i];
+                    ctx.fillStyle = 'green';
+                    ctx.fillRect(x,y,Width,Height);
+                    ctx.fillStyle = 'black';
+                    ctx.font = "18px serif";
+                    ctx.fillText(arr[i],x+9,y+15);
+                }
+            }
+            function animation() {
+            // 调用sort 方法，返回包括每一步内容的数组
+            var virtualArr = sort();
+            var interval = 150;
+            // 遍历得到的数组，每隔500ms，调用darw 方法，画出一步内容
+            virtualArr.forEach((item, index) => {
+                setTimeout(() => darw(item), index * interval);
+            });  
+            }
+            animation();
+        }
+        Sort.onclick = function(){
+            
+            bubbleSort(arr);
+            
+            
+        }
+    </script>
+</body>
+</html>
