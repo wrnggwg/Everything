@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Async ball</title>
+    <style>
+      .ball1 {
+        width: 50px;
+        height: 50px;
+        background-color: aqua;
+        border-radius: 50%;
+        transform: translateX(0);
+      }
+      .ball2 {
+        width: 50px;
+        height: 50px;
+        background-color: darkorange;
+        border-radius: 50%;
+        transform: translateX(0);
+      }
+      .ball3 {
+        width: 50px;
+        height: 50px;
+        background-color: slategrey;
+        border-radius: 50%;
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball ball1"></div>
+    <div class="ball ball2"></div>
+    <div class="ball ball3"></div>
+    <script>
+      const ball1 = document.querySelector('.ball1')
+      const ball2 = document.querySelector('.ball2')
+      const ball3 = document.querySelector('.ball3')
+
+      // demo 使用时只把相应注释取消就行
+      
+      function cb(ball){                                         //传入球使其移动
+        var timer = setInterval(() => {
+          var ballPosition = window.getComputedStyle(ball, null);
+          var oldValue = parseInt(ballPosition.transform.split(',')[4]);
+          var newValue = oldValue + 1;
+          ball.style.transform = 'translateX('+ newValue + 'px)';
+          if(newValue==150){
+              clearInterval(timer);
+          }
+        }, 20);
+      }
+
+
+    /*
+                    callback 用法的 demo
+    */
+
+      // function move(ball, target, cb) {
+      //   // TODO
+      //   setTimeout(() => {
+      //     cb(ball);    
+      //   }, target);
+      //   return move;
+      // }
+      // move(ball1,1,cb)(ball2,3000,cb)(ball3,6000,cb);
+      
+
+
+
+
+
+    /*            
+                    Promise 用法的 demo                  
+    */
+
+      // function move(ball, target) {
+      //   // TODO
+      //   const promise = new Promise(function(resolve,reject){
+      //       cb(ball);
+      //       setTimeout(()=>{
+      //           resolve(ball2);
+      //       },3000)
+      //   });
+      //   return promise;
+      // }
+      // move(ball1,0).then(function(ball){
+      //     const promise = new Promise(function(resolve,reject){
+      //       cb(ball);
+      //       setTimeout(()=>{
+      //           resolve(ball3);
+      //       },3000)
+      //     });
+      //     return promise;
+      // }).then(function(ball){
+      //   cb(ball);
+      // });
+
+
+
+
+
+    /*
+               async/await 用法的 demo
+    */
+//     const asy = function(time) {
+//         return new Promise((resolve, reject) =>{
+//         setTimeout(()=>{
+//             resolve();
+//         }, time)
+//     })
+// }
+//       async function go() {
+//         // TODO
+//         cb(ball1);
+//         await asy(3000);
+//         cb(ball2);
+//         await asy(3000);
+//         cb(ball3);
+//       }
+//       go();
+    </script>
+  </body>
+</html>
